@@ -12,15 +12,23 @@ import com.andrewsavich.productmanager.service.ProductService;
 
 @Controller
 public class AppController {
-	
+
 	@Autowired
 	private ProductService service;
-	
+
 	@RequestMapping("/")
 	public String viewHomePage(Model model) {
 		List<Product> products = service.getAllProducts();
 		model.addAttribute("products", products);
-		
+
 		return "index";
+	}
+
+	@RequestMapping("/new")
+	public String showNewProductForm(Model model) {
+		Product product = new Product();
+		model.addAttribute("product", product);
+
+		return "new_product";
 	}
 }
